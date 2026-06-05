@@ -1,0 +1,57 @@
+---
+// The recurring brand motif between sections.
+const emblem = 'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/PAM_PARKING_1.png?v=1773273940';
+---
+
+<div class="arrival reveal">
+  <img class="arrival-emblem" src={emblem} alt="" aria-hidden="true" />
+  <div class="arrival-prompt">
+    <span class="arrival-arrow" aria-hidden="true">
+      <svg width="22" height="34" viewBox="0 0 24 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2V34M12 34L3 25M12 34L21 25" stroke="#d4af37" stroke-width="3"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <p class="arrival-text">Continue the arrival</p>
+  </div>
+</div>
+
+<style>
+  .arrival {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 40px 20px 30px;
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+  }
+  .arrival-emblem {
+    height: 44px;
+    width: auto;
+    opacity: 0.92;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+  }
+  .arrival-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .arrival-arrow {
+    display: block;
+    animation: arrivalPulse 2.3s ease-in-out infinite;
+  }
+  @keyframes arrivalPulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  .arrival-text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.78;
+  }
+</style>

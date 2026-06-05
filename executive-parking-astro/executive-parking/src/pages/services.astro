@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CarLineArt from '../components/CarLineArt.astro';
+import JourneyCTA from '../components/JourneyCTA.astro';
+
+const title = 'Services | PAM Executive Parking — Luxury Valet Palm Beach & South Florida';
+const description = 'Exemplary private valet services for Palm Beach estates, private clubs, entertainment venues, restaurants, hotels, luxury retail, and special events. Luxury valet Palm Beach. Private executive valet South Florida.';
+
+const services = [
+  {
+    title: 'Club Services',
+    body: "Our private club valet service is the quiet engine behind Palm Beach's most storied institutions. From members' arrivals at legendary country clubs and yacht clubs to high-volume tournament days and galas, Executive Parking delivers seamless, members-only valet parking with absolute discretion and zero wait. We integrate invisibly into your club's established standards—protecting both your members' vehicles and the unhurried elegance of every arrival.",
+  },
+  {
+    title: 'Private Event Services',
+    body: 'For weddings, private galas, charity benefits, and estate soirées across Palm Beach and South Florida, our luxury event valet ensures the evening begins and ends in perfect order. We scale precisely to your guest count, choreograph arrivals and departures down to the minute, and treat every vehicle—and every guest—as the guest of honor. The result is a flawless first and last impression that lets you host with complete peace of mind.',
+  },
+  {
+    title: 'Entertainment Venues',
+    body: 'Executive Parking provides professional valet parking for theaters, galleries, museums, and premier entertainment venues throughout West Palm Beach and South Florida. We manage high-density, time-compressed arrivals and post-event departures with military-level coordination—keeping curbs clear, lines short, and patrons moving gracefully. Your venue\u2019s reputation begins at the door, and we make certain it opens beautifully.',
+  },
+  {
+    title: 'Restaurant & Hotel Parking',
+    body: 'From acclaimed fine-dining rooms to boutique luxury hotels, our white-glove restaurant and hotel valet elevates hospitality from the very first moment. We deliver punctual, courteous, impeccably presented attendants, efficient vehicle handling, and the seamless arrivals and departures discerning guests expect. Reliable valet parking in West Palm Beach that protects your guests\u2019 time, your property\u2019s flow, and your establishment\u2019s standing.',
+  },
+  {
+    title: 'Retail Parking',
+    body: 'For luxury retail destinations, flagship boutiques, and Worth Avenue\u2013caliber shopping experiences, Executive Parking offers refined valet that turns parking into part of the clientele experience. We keep premium frontage effortless and welcoming, manage peak shopping hours with calm precision, and extend your brand\u2019s hospitality from the sidewalk to the showroom floor.',
+  },
+  {
+    title: 'Consultation Services',
+    body: 'Beyond valet, we offer private consultation for estates, clubs, developers, and venues seeking to design or refine their own arrival operations. Drawing on more than a decade of luxury valet experience across Palm Beach and South Florida, we assess traffic flow, staffing, security, and guest experience—then deliver a tailored blueprint for flawless, discreet arrivals. When you demand perfection in every detail, we help you build it.',
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <!-- Page header -->
+  <section class="page-head">
+    <div class="wrap">
+      <h1 class="section-title reveal" style="text-align:center">Services</h1>
+      <p class="page-head-lede reveal">
+        Exemplary private valet experiences for Palm Beach's most distinguished estates,
+        legendary clubs, world-renowned institutions, and ultra-high-net-worth residences.
+      </p>
+      <p class="page-head-seo reveal">
+        Luxury valet Palm Beach • Private executive valet South Florida • Estate valet parking perfected.
+      </p>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <!-- Services accordions -->
+  <section class="band">
+    <div class="wrap split">
+      <div class="split-media"><CarLineArt label="PAM Executive Parking — luxury valet services" /></div>
+      <div class="split-text">
+        <h2 class="section-title reveal" style="font-size: clamp(1.9rem,4vw,2.9rem); margin-bottom: clamp(26px,4vw,40px);">
+          Our Distinguished Services
+        </h2>
+        <div class="svc-list reveal">
+          {services.map((s) => (
+            <details class="svc-item">
+              <summary>
+                <span>{s.title}</span>
+                <span class="svc-mark" aria-hidden="true"></span>
+              </summary>
+              <div class="svc-answer"><p>{s.body}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <JourneyCTA />
+</Layout>
+
+<style>
+  .page-head {
+    padding: clamp(120px, 16vw, 180px) 0 clamp(40px, 6vw, 60px);
+    background: var(--night);
+  }
+  .page-head-lede {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    font-size: clamp(1.02rem, 2.2vw, 1.32rem);
+    max-width: 660px;
+    margin: 22px auto 16px;
+  }
+  .page-head-seo {
+    text-align: center;
+    color: var(--gold-soft);
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+
+  .band { padding: clamp(60px, 8vw, 100px) 0; background: var(--night); }
+
+  .split {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(36px, 6vw, 80px);
+    align-items: center;
+  }
+  .split-text { max-width: 620px; }
+
+  /* Accordion items styled as bordered gold boxes (matches original) */
+  .svc-list { display: flex; flex-direction: column; gap: 16px; }
+  .svc-item {
+    border: 1px solid rgba(212,175,55,0.35);
+    background: var(--night-3);
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+  }
+  .svc-item[open] { border-color: var(--gold); background: rgba(212,175,55,0.04); }
+  .svc-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 20px 22px;
+    font-family: var(--font-display);
+    font-size: clamp(1.02rem, 2vw, 1.22rem);
+    color: var(--gold);
+  }
+  .svc-item summary::-webkit-details-marker { display: none; }
+  .svc-item summary:hover { color: var(--paper); }
+
+  .svc-mark {
+    position: relative;
+    flex: 0 0 auto;
+    width: 16px; height: 16px;
+  }
+  .svc-mark::before,
+  .svc-mark::after {
+    content: '';
+    position: absolute;
+    background: var(--gold);
+    transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+  }
+  .svc-mark::before { top: 7px; left: 0; width: 16px; height: 2px; }
+  .svc-mark::after  { top: 0; left: 7px; width: 2px; height: 16px; }
+  .svc-item[open] .svc-mark::after { transform: rotate(90deg); opacity: 0; }
+
+  .svc-answer {
+    padding: 0 22px 22px;
+    color: var(--text);
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .svc-answer p { margin: 0; }
+
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; gap: 36px; }
+    .split-media { max-width: 420px; margin: 0 auto; }
+  }
+</style>

@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CarLineArt from '../components/CarLineArt.astro';
+import JourneyCTA from '../components/JourneyCTA.astro';
+
+const title = 'About Us | PAM Executive Parking — Luxury Private Valet Palm Beach';
+const description = 'At PAM Executive Parking, we believe the ultimate luxury is time. Discover the precision, discipline, and elite training behind Palm Beach\u2019s premier private valet service across South Florida.';
+---
+
+<Layout title={title} description={description}>
+  <!-- Page header -->
+  <section class="page-head">
+    <div class="wrap">
+      <h1 class="section-title reveal" style="text-align:center">About Us</h1>
+      <p class="page-head-lede reveal">
+        At PAM Executive Parking, we believe the ultimate luxury is time—and we are
+        committed to never wasting yours.
+      </p>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <!-- Story split -->
+  <section class="band">
+    <div class="wrap split">
+      <div class="split-media"><CarLineArt label="PAM Executive Parking — luxury valet" /></div>
+      <div class="split-text reveal">
+        <p>
+          At PAM Executive Parking, we believe the ultimate luxury is time—and we are
+          committed to never wasting yours.
+        </p>
+        <p>
+          We deliver a premium valet experience defined by precision, discipline, and
+          seamless execution. Inspired by military-level coordination and attention to
+          detail, our team operates with efficiency and purpose, ensuring every arrival
+          and departure is handled flawlessly.
+        </p>
+        <p>
+          Valet service is more than parking—it's the first and last impression. Our
+          highly trained attendants provide a polished, professional presence while
+          treating every vehicle with the utmost care and respect.
+        </p>
+        <p>
+          Whether serving upscale venues, private events, or exclusive residences, we
+          bring a structured, reliable approach that minimizes wait times and maximizes
+          convenience.
+        </p>
+        <p>
+          At PAM Executive Parking, we don't just provide valet—we deliver time back to
+          you, wrapped in a truly luxury experience.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Philosophy -->
+  <section class="band band-alt">
+    <div class="wrap" style="max-width: 920px;">
+      <h2 class="section-title reveal" style="text-align:center; font-size: clamp(2rem,4.4vw,3.2rem); margin-bottom: clamp(34px,5vw,52px);">
+        The Philosophy
+      </h2>
+      <div class="prose reveal">
+        <p>
+          The level of training our valet team undergoes is unlike anything you have
+          encountered in the industry. Our personnel participate in a highly structured
+          development program led by experienced private-sector instructors with
+          backgrounds in tactical training and high-performance operations.
+        </p>
+        <p>
+          A portion of their training is conducted through a specialized private training
+          organization, where they develop the ability to perform under pressure,
+          strengthen situational awareness, and execute rapid, effective decision-making.
+          This includes advanced instruction in maintaining composure in high-stress
+          environments, defensive driving techniques, emergency response protocols such
+          as CPR, and upholding accountability and professionalism at all times.
+        </p>
+        <p>
+          In addition, our team receives endurance and navigation training guided by
+          individuals with military experience. This component focuses on building
+          physical stamina, operational efficiency, and the ability to move strategically
+          through complex environments such as high-traffic areas, large-scale properties,
+          and multi-level structures. Emphasis is placed on coordination, adaptability,
+          and maintaining performance in time-sensitive situations.
+        </p>
+        <p>
+          This comprehensive level of preparation enables our team to operate with
+          exceptional precision and efficiency. The result is a service model focused on
+          minimizing liability, enhancing coordination, and significantly reducing guest
+          wait times.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <JourneyCTA />
+</Layout>
+
+<style>
+  .page-head {
+    padding: clamp(120px, 16vw, 180px) 0 clamp(40px, 6vw, 64px);
+    background: var(--night);
+  }
+  .page-head-lede {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+    max-width: 620px;
+    margin: 22px auto 0;
+  }
+
+  .band { padding: clamp(60px, 8vw, 100px) 0; background: var(--night); }
+  .band-alt { background: var(--night-2); }
+
+  .split {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(36px, 6vw, 80px);
+    align-items: center;
+  }
+  .split-text { max-width: 600px; }
+
+  .prose { max-width: 820px; margin: 0 auto; }
+  .prose p { margin-bottom: 1.5em; }
+
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; gap: 36px; }
+  }
+</style>
