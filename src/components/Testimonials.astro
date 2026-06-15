@@ -1,0 +1,319 @@
+---
+const emblem = 'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/PAM_PARKING_1.png?v=1773273940';
+
+const testimonials = [
+  {
+    quote: "Executive Parking has become an extension of our family. Every arrival and departure is timed with absolute precision and delivered with grace.",
+    author: "Mrs. Victoria Langford",
+    place: "Palm Beach Estate",
+  },
+  {
+    quote: "The gold standard of valet service. They are always on time, always discreet, and treat every guest as if they were arriving at their own estate.",
+    author: "Mr. Reginald Hastings",
+    place: "The Everglades Club",
+  },
+  {
+    quote: "From Jupiter to Miami, Executive Parking has elevated our entire experience across South Florida. True luxury that follows you wherever you go.",
+    author: "Ms. Isabella Moreau",
+    place: "South Florida Residences",
+  },
+  {
+    quote: "They anticipate every need before we even arrive. Executive Parking is the only valet we trust with our collection and our time.",
+    author: "Mr. Alexander Worthington",
+    place: "Worth Avenue Collection",
+  },
+];
+---
+
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="text-align:center">In Their Words</p>
+    <h2 class="section-title reveal" style="text-align:center; margin-bottom: 14px;">Testimonials</h2>
+    <p class="t-hint reveal">Tap an envelope to read · swipe to browse</p>
+  </div>
+
+  <div class="carousel-shell reveal">
+    <button class="t-arrow t-prev" id="tPrev" aria-label="Previous testimonial">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <div class="carousel" id="tCarousel" role="list">
+      {testimonials.map((t, i) => (
+        <div class="t-cell" role="listitem">
+          <button
+            class={`envelope${i === 0 ? ' js-first' : ''}`}
+            type="button"
+            aria-expanded="false"
+            aria-label={`Read testimonial from ${t.author}`}
+          >
+            <div class="flap"><span class="wax-seal"></span></div>
+            <div class="env-face" style={`background-image:url('${emblem}')`}></div>
+            <div class="letter">
+              <p class="t-quote">{t.quote}</p>
+              <p class="t-author">— {t.author}, {t.place}</p>
+            </div>
+          </button>
+        </div>
+      ))}
+    </div>
+
+    <button class="t-arrow t-next" id="tNext" aria-label="Next testimonial">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="t-dots" id="tDots" role="tablist" aria-label="Testimonial navigation">
+    {testimonials.map((_, i) => (
+      <button class={`t-dot${i === 0 ? ' active' : ''}`} type="button" data-idx={i} aria-label={`Go to testimonial ${i + 1}`}></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--night);
+    padding: clamp(64px, 9vw, 110px) 0 clamp(48px, 7vw, 80px);
+    overflow: hidden;
+  }
+  .t-hint {
+    text-align: center;
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    margin: 6px 0 0;
+  }
+
+  .carousel-shell {
+    position: relative;
+    margin-top: clamp(36px, 5vw, 58px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .carousel {
+    display: flex;
+    gap: clamp(20px, 4vw, 52px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 24px clamp(20px, 50vw, 50%) 36px;
+    flex: 1;
+  }
+  .carousel::-webkit-scrollbar { display: none; }
+
+  .t-cell {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+
+  /* ---- Envelope: now fully responsive, never overflows ---- */
+  .envelope {
+    position: relative;
+    width: min(86vw, 460px);
+    aspect-ratio: 4 / 3;
+    background: var(--paper-2);
+    border: clamp(9px, 1.6vw, 14px) solid var(--gold);
+    border-radius: 10px 10px 30px 10px;
+    box-shadow: 0 50px 90px rgba(0,0,0,0.9), inset 0 0 70px rgba(255,255,255,0.45);
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+    transition: transform 1s var(--ease);
+    display: block;
+  }
+  @media (hover: hover) {
+    .envelope:hover { transform: translateY(-18px) rotate(1.4deg) scale(1.02); }
+  }
+
+  /* emblem watermark on the closed envelope face */
+  .env-face {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 34%;
+    opacity: 0.85;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.6s var(--ease);
+  }
+  .envelope[aria-expanded='true'] .env-face { opacity: 0; }
+
+  .flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 47%;
+    background: linear-gradient(#d4af37, #b38b4d);
+    border-bottom: clamp(8px, 1.4vw, 14px) solid var(--ink);
+    clip-path: polygon(0 0, 50% 64%, 100% 0);
+    transform-origin: top;
+    transition: transform 1.3s var(--ease);
+    z-index: 3;
+  }
+  .envelope[aria-expanded='true'] .flap { transform: rotateX(-180deg); }
+
+  .wax-seal {
+    position: absolute;
+    top: 34%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(40px, 8vw, 60px);
+    aspect-ratio: 1;
+    background: radial-gradient(circle at 35% 35%, #f8e8c0, #1f1a16 68%);
+    border: 5px solid var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.7), inset 0 0 18px rgba(255,255,255,0.3);
+  }
+
+  .letter {
+    position: absolute;
+    inset: clamp(16px, 3vw, 26px);
+    background: var(--paper);
+    border: 2px solid #e8d9b8;
+    box-shadow: 0 20px 48px rgba(0,0,0,0.26);
+    padding: clamp(24px, 5vw, 52px) clamp(22px, 5vw, 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s var(--ease) 0.3s, transform 0.9s var(--ease) 0.3s;
+    z-index: 2;
+  }
+  .envelope[aria-expanded='true'] .letter { opacity: 1; transform: translateY(0); }
+
+  .t-quote {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(0.98rem, 2.4vw, 1.3rem);
+    line-height: 1.6;
+    margin: 0 0 clamp(16px, 3vw, 30px);
+  }
+  .t-author {
+    font-family: var(--font-display);
+    font-size: clamp(0.86rem, 2vw, 1.08rem);
+    color: var(--gold-soft);
+    letter-spacing: 0.06em;
+    margin: 0;
+  }
+
+  /* ---- Arrows ---- */
+  .t-arrow {
+    flex: 0 0 auto;
+    width: 50px; height: 50px;
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 50%;
+    background: rgba(7,7,9,0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease), opacity 0.3s;
+    z-index: 5;
+  }
+  .t-arrow:hover { background: rgba(212,175,55,0.14); border-color: var(--gold); }
+  .t-arrow:disabled { opacity: 0.3; cursor: default; }
+
+  /* ---- Dots ---- */
+  .t-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+  }
+  .t-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .t-dot.active { background: var(--gold); transform: scale(1.25); }
+
+  @media (max-width: 880px) {
+    .t-arrow { display: none; }
+    .carousel { padding-left: 7vw; padding-right: 7vw; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var carousel = document.getElementById('tCarousel');
+    var prev = document.getElementById('tPrev');
+    var next = document.getElementById('tNext');
+    var dotsWrap = document.getElementById('tDots');
+    if (!carousel) return;
+
+    var cells = Array.prototype.slice.call(carousel.querySelectorAll('.t-cell'));
+    var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.t-dot'));
+    var current = 0;
+
+    function scrollToIdx(i) {
+      i = Math.max(0, Math.min(cells.length - 1, i));
+      current = i;
+      var cell = cells[i];
+      carousel.scrollTo({
+        left: cell.offsetLeft - (carousel.clientWidth - cell.clientWidth) / 2,
+        behavior: 'smooth',
+      });
+      updateUI();
+    }
+
+    function updateUI() {
+      dots.forEach(function (d, di) { d.classList.toggle('active', di === current); });
+      if (prev) prev.disabled = current === 0;
+      if (next) next.disabled = current === cells.length - 1;
+    }
+
+    // Determine nearest cell on manual scroll
+    var raf;
+    carousel.addEventListener('scroll', function () {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () {
+        var center = carousel.scrollLeft + carousel.clientWidth / 2;
+        var best = 0, bestDist = Infinity;
+        cells.forEach(function (c, ci) {
+          var cc = c.offsetLeft + c.clientWidth / 2;
+          var d = Math.abs(cc - center);
+          if (d < bestDist) { bestDist = d; best = ci; }
+        });
+        if (best !== current) { current = best; updateUI(); }
+      });
+    }, { passive: true });
+
+    if (prev) prev.addEventListener('click', function () { scrollToIdx(current - 1); });
+    if (next) next.addEventListener('click', function () { scrollToIdx(current + 1); });
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () { scrollToIdx(parseInt(d.dataset.idx, 10)); });
+    });
+
+    // Toggle envelopes open/closed
+    carousel.querySelectorAll('.envelope').forEach(function (env) {
+      env.addEventListener('click', function () {
+        var open = env.getAttribute('aria-expanded') === 'true';
+        env.setAttribute('aria-expanded', String(!open));
+      });
+    });
+
+    // Auto-open the first envelope once the section is seen
+    var first = carousel.querySelector('.js-first');
+    if (first && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            setTimeout(function () { first.setAttribute('aria-expanded', 'true'); }, 1400);
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      io.observe(document.getElementById('testimonials'));
+    }
+
+    updateUI();
+  })();
+</script>

@@ -1,0 +1,179 @@
+---
+import { careersMailto } from '../data/site.js';
+
+const logo = 'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/PAM_14.png?v=1776435560';
+---
+
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/" aria-label="PAM Executive Parking — home">
+      <img src={logo} alt="PAM Executive Parking" />
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/about-us">About Us</a>
+      <a href="/services">Services</a>
+      <a href={careersMailto}>Careers</a>
+      <a class="nav-cta" href="/#quote">Request a Quote</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="/about-us">About Us</a>
+    <a href="/services">Services</a>
+    <a href={careersMailto}>Careers</a>
+    <a class="mobile-cta" href="/#quote">Request a Quote</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10, 10, 15, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+    transition: background 0.5s var(--ease);
+  }
+  .nav.scrolled {
+    background: rgba(7, 7, 9, 0.92);
+  }
+  .nav-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(18px, 4vw, 48px);
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo img {
+    height: 46px;
+    width: auto;
+    transition: transform 0.5s var(--ease);
+  }
+  .nav-logo:hover img { transform: scale(1.05); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(22px, 3vw, 46px);
+  }
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.96rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.4s var(--ease);
+  }
+  .nav-links a:not(.nav-cta)::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.45s var(--ease);
+  }
+  .nav-links a:not(.nav-cta):hover { color: var(--gold); }
+  .nav-links a:not(.nav-cta):hover::after { width: 100%; }
+
+  .nav-cta {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 24px;
+    transition: background 0.45s var(--ease), color 0.45s var(--ease);
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--night); }
+
+  /* Hamburger */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-toggle span {
+    width: 28px; height: 2px;
+    background: var(--gold);
+    transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
+  }
+  .nav-toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    background: rgba(7, 7, 9, 0.98);
+    border-top: 1px solid rgba(212, 175, 55, 0.16);
+    padding: 14px clamp(18px, 6vw, 40px) 30px;
+    gap: 4px;
+  }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu a {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-cta {
+    color: var(--gold) !important;
+    border-bottom: 0 !important;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-inner { height: 68px; }
+    .nav-logo img { height: 40px; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var nav = document.getElementById('siteNav');
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('mobileMenu');
+
+    if (toggle && menu) {
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+        if (open) { menu.hidden = true; }
+        else { menu.hidden = false; }
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+          menu.hidden = true;
+        });
+      });
+    }
+
+    var onScroll = function () {
+      if (window.scrollY > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>

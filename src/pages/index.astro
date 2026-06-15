@@ -1,0 +1,359 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArrivalDivider from '../components/ArrivalDivider.astro';
+import Testimonials from '../components/Testimonials.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { site, contactMailto } from '../data/site.js';
+
+const video = 'https://cdn.shopify.com/videos/c/o/v/749d09e799244337b693f68975c1979a.mp4';
+const img = {
+  experience: 'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/image_33.jpg?v=1772032594',
+  story:      'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/image_44.jpg?v=1773271363',
+  service:    'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/image_47.jpg?v=1773271748',
+  clients:    'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/image_45.jpg?v=1773271517',
+  team:       'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/image_46.jpg?v=1773271749',
+  contact:    'https://cdn.shopify.com/s/files/1/0710/5658/8961/files/PAM_PARKING.png?v=1772504766',
+};
+
+const faqs = [
+  {
+    q: 'What is the best valet parking in West Palm Beach?',
+    a: 'Executive Parking is the best valet parking West Palm Beach for private estates, clubs, hotels, restaurants, weddings, house parties, and special events. We deliver professional valet service with superior reliability, absolute discretion, and zero wait time.',
+  },
+  {
+    q: 'How does valet parking work in West Palm Beach?',
+    a: 'Valet parking in West Palm Beach is simple with Executive Parking. Schedule your preferred time and our team arrives at your estate, club, hotel, restaurant, or event venue to handle every vehicle arrival and departure efficiently and discreetly.',
+  },
+  {
+    q: 'Do you offer residential and commercial valet parking in West Palm Beach?',
+    a: 'Yes. Executive Parking provides premium residential valet parking for estates and commercial valet parking for private clubs, hotels, restaurants, and special events throughout West Palm Beach and Palm Beach Island.',
+  },
+  {
+    q: 'How can I book valet parking for a wedding or special event in West Palm Beach?',
+    a: 'Booking valet parking West Palm Beach for weddings, house parties, or special events is easy. Contact us to arrange a custom professional valet solution designed for your exact guest volume, timeline, and venue requirements.',
+  },
+  {
+    q: 'Why is Executive Parking the best valet parking service in West Palm Beach?',
+    a: 'Executive Parking stands above every other valet company in West Palm Beach. We deliver unmatched professional standards, superior punctuality, vehicle care, and white-glove service exclusively for distinguished estates, luxury venues, and high-end events.',
+  },
+];
+---
+
+<Layout>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster={img.experience}>
+      <source src={video} type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>PAM Executive Parking</h1>
+      <p class="hero-sub">The Ultimate Luxury is Time</p>
+      <a class="btn-gold hero-cta" href="#quote">Request a Quote</a>
+    </div>
+    <a class="hero-scroll" href="#experience" aria-label="Scroll down">
+      <svg width="20" height="32" viewBox="0 0 24 38" fill="none"><path d="M12 2V34M12 34L3 25M12 34L21 25" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <!-- ============ THE BEST EXPERIENCE ============ -->
+  <section class="band" id="experience">
+    <div class="wrap split">
+      <div class="split-media reveal">
+        <img src={img.experience} alt="The best valet experience in South Florida" loading="lazy" />
+      </div>
+      <div class="split-text reveal">
+        <p class="eyebrow">The Best Valet Experience in South Florida</p>
+        <h2 class="section-title">Every detail, deliberately executed.</h2>
+        <p>
+          As Palm Beach's premier luxury valet service, PAM Executive Parking delivers
+          white-glove private valet experiences for distinguished estates, iconic private
+          clubs, and ultra-high-net-worth clients across South Florida. Zero wait times,
+          absolute discretion, and military-level precision—because your time is the
+          ultimate luxury.
+        </p>
+      </div>
+    </div>
+    <div class="wrap"><ArrivalDivider /></div>
+  </section>
+
+  <!-- ============ THE STORY ============ -->
+  <section class="band band-alt">
+    <div class="wrap split reverse">
+      <div class="split-media reveal">
+        <img src={img.story} alt="Executive Parking — our story" loading="lazy" />
+      </div>
+      <div class="split-text reveal">
+        <p class="eyebrow">The Story</p>
+        <h2 class="section-title">Peak operational excellence, from the island and beyond.</h2>
+        <p>
+          For over ten years we have quietly perfected the art of luxury valet Palm Beach.
+          From legendary estates and exclusive private clubs to world-renowned institutions,
+          PAM Executive Parking brings military-trained precision, tactical coordination,
+          and uncompromising attention to detail to every arrival and departure.
+        </p>
+      </div>
+    </div>
+    <div class="wrap"><ArrivalDivider /></div>
+  </section>
+
+  <!-- ============ THE SERVICE ============ -->
+  <section class="band">
+    <div class="wrap split">
+      <div class="split-media reveal">
+        <img src={img.service} alt="Executive Parking — our service" loading="lazy" />
+      </div>
+      <div class="split-text reveal">
+        <p class="eyebrow">The Service</p>
+        <h2 class="section-title">Expected by few, experienced by you.</h2>
+        <p>
+          We provide white-glove luxury valet Palm Beach and private valet services from
+          Jupiter to Miami. Whether at distinguished estates, legendary clubs, or
+          ultra-exclusive residences, our team ensures flawless, on-time arrivals and
+          departures with absolute discretion and seamless execution. True luxury follows you.
+        </p>
+        <a class="btn-gold" href="/services" style="margin-top:6px">Explore Our Services</a>
+      </div>
+    </div>
+    <div class="wrap"><ArrivalDivider /></div>
+  </section>
+
+  <!-- ============ THE CLIENTS ============ -->
+  <section class="band band-alt">
+    <div class="wrap split reverse">
+      <div class="split-media reveal">
+        <img src={img.clients} alt="Executive Parking — our clients" loading="lazy" />
+      </div>
+      <div class="split-text reveal">
+        <p class="eyebrow">The Clients</p>
+        <h2 class="section-title">Trusted by those who expect perfection.</h2>
+        <p>
+          PAM Executive Parking is the preferred private valet service for Palm Beach's
+          most distinguished families, legendary estates, iconic private clubs, and
+          respected institutions throughout South Florida. If you demand flawless timing,
+          white-glove service, and complete peace of mind, you belong with us.
+        </p>
+      </div>
+    </div>
+    <div class="wrap"><ArrivalDivider /></div>
+  </section>
+
+  <!-- ============ THE TEAM ============ -->
+  <section class="band">
+    <div class="wrap split">
+      <div class="split-media reveal">
+        <img src={img.team} alt="Executive Parking — the team" loading="lazy" />
+      </div>
+      <div class="split-text reveal">
+        <p class="eyebrow">The Team</p>
+        <h2 class="section-title">The quiet guardians of every distinguished arrival.</h2>
+        <p>
+          Each member of our team undergoes elite training—military-level defensive driving,
+          situational awareness, risk management, and white-glove protocol. This ensures the
+          highest standards of safety, precision, and professionalism for your luxury valet
+          experience in Palm Beach and South Florida.
+        </p>
+      </div>
+    </div>
+    <div class="wrap"><ArrivalDivider /></div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <Testimonials />
+
+  <!-- ============ INQUIRY FORM ============ -->
+  <QuoteForm />
+
+  <!-- ============ CONTACT ============ -->
+  <section class="band contact" id="contact">
+    <div class="wrap split">
+      <div class="split-text reveal">
+        <p class="eyebrow">Contact Us</p>
+        <h2 class="section-title" style="font-size: clamp(2rem,4.4vw,3.2rem)">Executive Parking</h2>
+        <p class="contact-tag">Private Valet Service for Palm Beach &amp; South Florida</p>
+        <p class="contact-lines">
+          <a href={contactMailto}>{site.email}</a><br />
+          <a href={site.phoneHref}>{site.phone}</a>
+        </p>
+        <p class="contact-lines">
+          {site.address.street}<br />
+          {site.address.city}
+        </p>
+        <p class="contact-note">
+          Available 24 hours a day for our distinguished clients.<br />
+          Just call. We arrive.
+        </p>
+      </div>
+      <div class="split-media reveal">
+        <img src={img.contact} alt="Executive Parking — contact us" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="band band-alt faq" id="faq">
+    <div class="wrap" style="max-width: 920px;">
+      <p class="eyebrow reveal" style="text-align:center">Frequently Asked Questions</p>
+      <h2 class="section-title reveal" style="text-align:center; font-size: clamp(2rem,4.4vw,3.2rem); margin-bottom:18px;">
+        Valet Parking West Palm Beach
+      </h2>
+      <p class="reveal" style="text-align:center; font-style:italic; color:var(--text-dim); max-width:640px; margin:0 auto clamp(36px,5vw,56px);">
+        Answered with the same discretion and precision that define every arrival
+        beneath our private porte-cochère.
+      </p>
+
+      <div class="faq-list reveal">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-answer"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+    <div class="wrap"><ArrivalDivider /></div>
+  </section>
+</Layout>
+
+<style>
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(120% 90% at 50% 40%, rgba(10,10,15,0.35), rgba(10,10,15,0.78)),
+      linear-gradient(180deg, rgba(10,10,15,0.5) 0%, rgba(10,10,15,0.2) 45%, rgba(10,10,15,0.92) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 24px;
+    animation: heroRise 1.4s var(--ease) both;
+  }
+  @keyframes heroRise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  .hero h1 {
+    font-size: clamp(2.6rem, 8vw, 6.4rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-shadow: 0 6px 40px rgba(0,0,0,0.6);
+  }
+  .hero-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.9rem);
+    color: var(--gold);
+    margin: 18px 0 34px;
+    letter-spacing: 0.04em;
+  }
+  .hero-cta { background: rgba(10,10,15,0.3); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    animation: arrivalPulse 2.3s ease-in-out infinite;
+  }
+  @keyframes arrivalPulse { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,8px); } }
+
+  /* ---------- NARRATIVE BANDS ---------- */
+  .band {
+    padding: clamp(64px, 9vw, 120px) 0 0;
+    background: var(--night);
+  }
+  .band-alt { background: var(--night-2); }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(36px, 6vw, 86px);
+    align-items: center;
+  }
+  .split-text { max-width: 560px; }
+  .split-text .section-title { margin-bottom: 26px; }
+  .split-media img {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(212,175,55,0.25);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
+
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; gap: 32px; }
+    .split.reverse .split-media { order: -1; }
+    .split-text { max-width: none; }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-tag { color: var(--text); font-style: italic; margin-top: -8px; }
+  .contact-lines { margin: 0 0 1.1em; }
+  .contact-lines a { color: var(--gold); transition: color 0.3s var(--ease); }
+  .contact-lines a:hover { color: var(--paper); }
+  .contact-note { color: var(--text-dim); font-style: italic; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list {
+    border-top: 1px solid rgba(212,175,55,0.16);
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(212,175,55,0.16);
+  }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 4px;
+    font-family: var(--font-display);
+    font-size: clamp(1.08rem, 2.2vw, 1.4rem);
+    color: var(--gold);
+    transition: color 0.3s var(--ease);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:hover { color: var(--paper); }
+  .faq-mark {
+    position: relative;
+    flex: 0 0 auto;
+    width: 18px; height: 18px;
+  }
+  .faq-mark::before,
+  .faq-mark::after {
+    content: '';
+    position: absolute;
+    background: var(--gold);
+    transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+  }
+  .faq-mark::before { top: 8px; left: 0; width: 18px; height: 2px; }
+  .faq-mark::after  { top: 0; left: 8px; width: 2px; height: 18px; }
+  .faq-item[open] .faq-mark::after { transform: rotate(90deg); opacity: 0; }
+  .faq-answer {
+    padding: 0 4px 28px;
+    color: var(--text);
+    max-width: 760px;
+  }
+  .faq-answer p { margin: 0; }
+</style>
