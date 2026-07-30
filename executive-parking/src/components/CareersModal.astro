@@ -1,0 +1,232 @@
+---
+import { careersFormspreeAction, site } from '../data/site.js';
+---
+
+<div class="careers-overlay" id="careersModal" hidden>
+  <div class="careers-dialog" role="dialog" aria-modal="true" aria-labelledby="careersTitle">
+    <button class="careers-close" id="careersClose" aria-label="Close">&times;</button>
+
+    <p class="eyebrow" style="text-align:center">Join the Team</p>
+    <h2 class="section-title" id="careersTitle">Careers</h2>
+    <p class="careers-lede">
+      We are always seeking disciplined, discreet professionals who share our
+      standard of excellence. Introduce yourself below.
+    </p>
+
+    <form
+      class="careers-form js-formspree"
+      action={careersFormspreeAction}
+      method="POST"
+      data-success="careersSuccess"
+    >
+      <input type="hidden" name="_subject" value="New Careers Inquiry — Executive Parking" />
+      <input type="hidden" name="Inquiry Type" value="Careers" />
+
+      <div class="cfield">
+        <label for="cName">Full Name</label>
+        <input id="cName" name="Full Name" type="text" autocomplete="name" required />
+      </div>
+
+      <div class="cfield-row">
+        <div class="cfield">
+          <label for="cEmail">Email Address</label>
+          <input id="cEmail" name="Email Address" type="email" autocomplete="email" required />
+        </div>
+        <div class="cfield">
+          <label for="cPhone">Phone <span class="opt">(optional)</span></label>
+          <input id="cPhone" name="Phone Number" type="tel" autocomplete="tel" />
+        </div>
+      </div>
+
+      <div class="cfield">
+        <label for="cRole">Position of Interest <span class="opt">(optional)</span></label>
+        <input id="cRole" name="Position of Interest" type="text" placeholder="e.g. Valet Attendant" />
+      </div>
+
+      <div class="cfield">
+        <label for="cMsg">Tell us about yourself</label>
+        <textarea id="cMsg" name="Message" rows="4" required></textarea>
+      </div>
+
+      <!-- Spam honeypot -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;" />
+
+      <div class="csubmit">
+        <button class="btn-gold" type="submit">Submit Application</button>
+      </div>
+
+      <p class="careers-fallback">
+        Prefer email? Write to
+        <a href={`mailto:${site.careersEmail}?subject=${encodeURIComponent('Career Inquiry — Executive Parking')}`}>{site.careersEmail}</a>
+      </p>
+    </form>
+
+    <div class="careers-success" id="careersSuccess" hidden>
+      <h3>Thank you for your interest.</h3>
+      <p>Your application has been received. If your background aligns with our
+         standard of service, a member of our team will be in touch.</p>
+      <button class="btn-gold" type="button" id="careersDone">Close</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .careers-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(4, 4, 6, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(16px, 5vh, 70px) 18px;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+  }
+  .careers-overlay[hidden] { display: none; }
+  .careers-overlay.open { opacity: 1; }
+
+  .careers-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    background: var(--night-2);
+    border: 1px solid var(--gold);
+    box-shadow: 0 60px 120px rgba(0, 0, 0, 0.8);
+    padding: clamp(30px, 5vw, 56px) clamp(22px, 5vw, 56px) clamp(28px, 4vw, 44px);
+    transform: translateY(22px) scale(0.98);
+    transition: transform 0.45s var(--ease);
+  }
+  .careers-overlay.open .careers-dialog { transform: translateY(0) scale(1); }
+
+  .careers-close {
+    position: absolute;
+    top: 12px; right: 16px;
+    background: none;
+    border: 0;
+    color: var(--gold);
+    font-size: 2.1rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px 10px;
+    transition: color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .careers-close:hover { color: var(--paper); transform: rotate(90deg); }
+
+  .careers-dialog .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+  .careers-lede {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    max-width: 460px;
+    margin: 14px auto clamp(26px, 4vw, 38px);
+  }
+
+  .careers-form { display: flex; flex-direction: column; gap: 18px; }
+  .cfield-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .cfield { display: flex; flex-direction: column; gap: 7px; }
+  .cfield label {
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+  .opt { text-transform: none; letter-spacing: 0.02em; color: var(--text-dim); font-style: italic; }
+
+  .cfield input,
+  .cfield textarea {
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    color: var(--paper);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    padding: 12px 14px;
+    width: 100%;
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+  }
+  .cfield textarea { resize: vertical; }
+  .cfield input:focus,
+  .cfield textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.05);
+  }
+
+  .csubmit { text-align: center; margin-top: 6px; }
+
+  .careers-fallback {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin: 6px 0 0;
+  }
+  .careers-fallback a { color: var(--gold-soft); }
+  .careers-fallback a:hover { color: var(--gold); }
+
+  .careers-success { text-align: center; padding: 30px 6px 8px; }
+  .careers-success[hidden] { display: none; }
+  .careers-success h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 14px; }
+  .careers-success p { color: var(--text); font-style: italic; max-width: 460px; margin: 0 auto 26px; }
+
+  @media (max-width: 560px) {
+    .cfield-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var modal = document.getElementById('careersModal');
+    if (!modal) return;
+    var dialog = modal.querySelector('.careers-dialog');
+    var closeBtn = document.getElementById('careersClose');
+    var doneBtn = document.getElementById('careersDone');
+    var form = modal.querySelector('.careers-form');
+    var success = document.getElementById('careersSuccess');
+    var lastFocus = null;
+
+    function open(e) {
+      if (e) e.preventDefault();
+      lastFocus = document.activeElement;
+      // reset to form view each open
+      if (form) form.hidden = false;
+      if (success) success.hidden = true;
+      modal.hidden = false;
+      requestAnimationFrame(function () { modal.classList.add('open'); });
+      document.body.style.overflow = 'hidden';
+      var first = modal.querySelector('input, textarea');
+      if (first) setTimeout(function () { first.focus(); }, 260);
+    }
+
+    function close() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(function () { modal.hidden = true; }, 380);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    // Any element with .js-careers-open triggers the modal
+    document.querySelectorAll('.js-careers-open').forEach(function (el) {
+      el.addEventListener('click', open);
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (doneBtn) doneBtn.addEventListener('click', close);
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) close(); // click on the backdrop
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  })();
+</script>
