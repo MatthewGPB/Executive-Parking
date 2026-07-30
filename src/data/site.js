@@ -6,10 +6,10 @@ export const site = {
   name: 'PAM Executive Parking',
 
   // Main contact inbox (Contact section + general inquiries)
-  email: 'p.montalvan@executiveparkingpb.com',
+  email: 'matthew@growpalmbeach.com',
 
   // Careers / employment inquiries route to a separate inbox
-  careersEmail: 'p.montalvan@icloud.com',
+  careersEmail: 'matthew@growpalmbeach.com',
 
   phone: '(561) 377-7704',
   phoneHref: 'tel:+15613777704',
