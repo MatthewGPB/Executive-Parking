@@ -16,7 +16,7 @@
 //  the site instantly returns to the Shopify CDN images.
 // ============================================================
 
-export const USE_LOCAL_IMAGES = false;
+export const USE_LOCAL_IMAGES = true;
 
 const CDN = 'https://cdn.shopify.com/s/files/1/0710/5658/8961/files';
 
