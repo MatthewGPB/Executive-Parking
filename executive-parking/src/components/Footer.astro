@@ -1,10 +1,23 @@
 ---
 import { site } from '../data/site.js';
+import { locations } from '../data/locations.js';
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <hr class="hairline" />
+
+  <!-- Sitewide service-area links (SEO internal linking) -->
+  <nav class="footer-areas" aria-label="Service areas">
+    <a class="footer-areas-label" href="/valet-parking/">Service Areas:</a>
+    {locations.map((l, i) => (
+      <>
+        <a href={`/valet-parking/${l.slug}/`}>{l.city}</a>
+        {i < locations.length - 1 && <span class="dot">·</span>}
+      </>
+    ))}
+  </nav>
+
   <div class="footer-inner">
     <p class="footer-copy">
       Executive Parking © {year} • Palm Beach &amp; South Florida
@@ -27,6 +40,27 @@ const year = new Date().getFullYear();
   .site-footer {
     background: var(--night-2);
     padding: 0 0 38px;
+  }
+  .footer-areas {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 26px clamp(20px, 5vw, 64px) 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .footer-areas a {
+    color: var(--text-dim);
+    transition: color 0.4s var(--ease);
+  }
+  .footer-areas a:hover { color: var(--gold); }
+  .footer-areas-label { color: var(--gold-soft) !important; }
+  @media (max-width: 620px) {
+    .footer-areas { justify-content: center; text-align: center; }
   }
   .footer-inner {
     max-width: var(--maxw);
