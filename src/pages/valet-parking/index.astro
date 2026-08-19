@@ -1,0 +1,153 @@
+---
+// ============================================================
+//  Service Areas hub — /valet-parking/
+//  Links to every city page so Google (and guests) can find
+//  them all from one crawlable index.
+// ============================================================
+import Layout from '../../layouts/Layout.astro';
+import JourneyCTA from '../../components/JourneyCTA.astro';
+import { locations } from '../../data/locations.js';
+
+const title =
+  'Valet Parking Service Areas — Jupiter to Miami | PAM Executive Parking';
+const description =
+  'PAM Executive Parking provides luxury private valet parking from Jupiter to Miami — Palm Beach, West Palm Beach, Wellington, Boca Raton, Fort Lauderdale, Miami Beach, and more.';
+
+// Group by county for an elegant three-part layout.
+const counties = ['Palm Beach County', 'Broward County', 'Miami-Dade County'];
+const grouped = counties.map((c) => ({
+  county: c,
+  cities: locations.filter((l) => l.county === c),
+}));
+---
+
+<Layout title={title} description={description}>
+  <!-- Page header -->
+  <section class="page-head">
+    <div class="wrap">
+      <h1 class="section-title reveal" style="text-align:center">Service Areas</h1>
+      <p class="page-head-lede reveal">
+        From Jupiter to Miami, one standard travels with us: white-glove private
+        valet, absolute discretion, and arrivals handled to perfection.
+      </p>
+      <p class="page-head-seo reveal">
+        Luxury valet parking across Palm Beach, Broward &amp; Miami-Dade counties.
+      </p>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <!-- Intro -->
+  <section class="band">
+    <div class="wrap" style="max-width: 820px;">
+      <div class="areas-intro reveal">
+        <p>
+          PAM Executive Parking serves the full luxury corridor of South
+          Florida&rsquo;s east coast. Whether your event is a season gala on Palm
+          Beach island, a tournament weekend in the Gardens, a boat-show
+          reception in Fort Lauderdale, or a penthouse evening above Miami
+          Beach, the same trained attendants, insurance coverage, and exacting
+          standard arrive with us.
+        </p>
+        <p>
+          Select your city below to learn how we serve it — or request a quote
+          and we will build a plan around your venue.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- City directory by county -->
+  <section class="band band-alt">
+    <div class="wrap" style="max-width: 1020px;">
+      {grouped.map((g) => (
+        <div class="county-block reveal">
+          <h2 class="county-title">{g.county}</h2>
+          <div class="city-grid">
+            {g.cities.map((l) => (
+              <a class="city-card" href={`/valet-parking/${l.slug}/`}>
+                <span class="city-name">{l.city}</span>
+                <span class="city-cta">Valet Parking in {l.city} →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <JourneyCTA />
+</Layout>
+
+<style>
+  .page-head {
+    padding: clamp(120px, 16vw, 180px) 0 clamp(40px, 6vw, 60px);
+    background: var(--night);
+  }
+  .page-head-lede {
+    text-align: center;
+    font-style: italic;
+    color: var(--text);
+    font-size: clamp(1.02rem, 2.2vw, 1.32rem);
+    max-width: 660px;
+    margin: 22px auto 16px;
+  }
+  .page-head-seo {
+    text-align: center;
+    color: var(--gold-soft);
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+  .areas-intro p {
+    color: var(--text);
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    line-height: 1.85;
+    margin: 0 0 1.4em;
+    text-align: center;
+  }
+  .areas-intro p:last-child { margin-bottom: 0; }
+
+  .county-block { margin-bottom: clamp(38px, 6vw, 56px); }
+  .county-block:last-child { margin-bottom: 0; }
+  .county-title {
+    font-family: var(--font-display, 'Playfair Display', serif);
+    color: var(--gold);
+    font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+    letter-spacing: 0.06em;
+    margin: 0 0 20px;
+    text-align: center;
+  }
+  .city-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .city-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 22px 24px;
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    background: rgba(255, 255, 255, 0.015);
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .city-card:hover {
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateY(-2px);
+  }
+  .city-name {
+    font-family: var(--font-display, 'Playfair Display', serif);
+    color: var(--text);
+    font-size: 1.22rem;
+  }
+  .city-cta {
+    color: var(--gold-soft);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .city-card:hover .city-cta { color: var(--gold); }
+</style>
